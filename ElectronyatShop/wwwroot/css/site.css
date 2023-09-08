@@ -17,6 +17,10 @@ html {
     min-height: 100%;
 }
 
+header {
+    background-color: #121212;
+}
+
 .footer {
     background-color: #303030;
     text-align: center;

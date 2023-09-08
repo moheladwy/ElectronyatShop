@@ -13,8 +13,8 @@ namespace ElectronyatShop.ViewModels
 		[Required(ErrorMessage = "Name is Required!")]
 		public string Name { get; set; }
 
-		// TODO: Make the Image Update.
-		// [Required(ErrorMessage = "Image is Required!")]
+		public string? ImageName { get; set; }
+
 		public IFormFile? Image { get; set; }
 
 		[Required(ErrorMessage = "Description is Required!")]

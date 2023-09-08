@@ -64,6 +64,7 @@ namespace ElectronyatShop.Controllers
             {
                 Id = product.Id,
                 Name = product.Name,
+                ImageName = product.Image,
                 Description = product.Description,
                 Price = product.Price,
                 AvailableQuantity = product.AvailableQuantity,
@@ -78,7 +79,7 @@ namespace ElectronyatShop.Controllers
         public IActionResult EditProduct([FromForm] ProductViewModel productViewModel)
         {
             Product? product = Context.Products.Find(productViewModel.Id);
-            if (ModelState.IsValid && product != null)
+            if (ModelState.IsValid && product != null && product.Id == productViewModel.Id)
             {
                 product.Name = productViewModel.Name;
                 product.Description = productViewModel.Description;
@@ -86,19 +87,13 @@ namespace ElectronyatShop.Controllers
                 product.AvailableQuantity = productViewModel.AvailableQuantity;
                 product.DiscountPercentage = productViewModel.DiscountPercentage;
                 product.Status = productViewModel.Status;
-				// TODO: Make the Image Update. 
-                // product.Image = productViewModel.Image
+                if (productViewModel.Image != null)
+                    product.Image = ProccessUploadedImage(productViewModel);
 
 				Context.Products.Update(product);
                 Context.SaveChanges();
                 return RedirectToAction("Index");
             }
-		    // TODO: Make the Image Update. 
-			string ImagesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images");
-			string ImagePath = Path.Combine(ImagesDirectory, product.Image);
-            var stream = System.IO.File.OpenRead(ImagePath);
-            productViewModel.Image = new FormFile(stream, 0, stream.Length, null, product.Image);
-            
             FillSelectedListForProductStatus(productViewModel);
             return View("Edit", productViewModel);
         }

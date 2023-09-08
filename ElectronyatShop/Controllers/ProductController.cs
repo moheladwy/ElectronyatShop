@@ -12,7 +12,7 @@ namespace ElectronyatShop.Controllers
 
         private readonly ApplicationDbContext Context;
 
-        //private readonly Cart? cart;
+        private readonly Cart? cart;
 
         public ProductController(ApplicationDbContext context)
         {
@@ -21,12 +21,18 @@ namespace ElectronyatShop.Controllers
             //cart = context.Carts.FirstOrDefault(c => c.UserId == userId);
         }
 
-        #region Controller Views
+        #region Controller Actions
 
+        [AllowAnonymous]
         [HttpGet]
-        public IActionResult Index() => View("Index", 
-            Context.Products.Where(p => p.Status == true).ToList());
-		
+        public IActionResult Index()
+        {
+            if ((User.Identity?.IsAuthenticated ?? false) && User.HasClaim("Admin", "Admin"))
+                return RedirectToAction(actionName: "Index", controllerName: "Admin");
+            return View("Index", Context.Products.Where(p => p.Status == true).ToList());
+        }
+
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Details([FromRoute] int id)
         {

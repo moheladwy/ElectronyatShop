@@ -11,6 +11,8 @@ namespace ElectronyatShop.Models
         [Required]
         public string LastName { get; set; }
 
+        public string FullName => $"{ FirstName } { LastName }";
+
         [Required]
         public string Address { get; set; }
     }

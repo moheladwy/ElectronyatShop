@@ -11,45 +11,83 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Electronyat Shop</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ElectronyatShop.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
     @await RenderSectionAsync("Links", required: false)
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="@(authorizationResult.Succeeded ? "Admin" : "Product")" asp-action="Index">Electronyat Shop</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="@(authorizationResult.Succeeded ? "Admin" : "Product")" asp-action="Index">Home</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-0">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="@(authorizationResult.Succeeded ? "Admin" : "Product")" asp-action="Index">Electronyat Shop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="@(authorizationResult.Succeeded ? "Admin" : "Product")" asp-action="Index">Home</a>
+                    </li>
+                </ul>
+                <partial name="_LoginPartial" />
             </div>
-        </nav>
+        </div>
+    </nav>
+    <header class="header py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Welcome to Electronyat Shop!</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Here you can find any laptops, keyboards, mouses, etc.</p>
+            </div>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
+    <footer class="footer-07">
         <div class="container">
-            &copy; 2023 - Electronyat Shop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    <h2 class="footer-heading">
+                        <a asp-controller="@(authorizationResult.Succeeded ? "Admin" : "Product")" asp-action="Index" class="logo">
+                            ElectronyatShop.com
+                        </a>
+                    </h2>
+                    <ul class="ftco-footer-social p-0">
+                        <li class="ftco-animate">
+                            <a href="https://www.linkedin.com/in/mohamedhusseineladwy/" data-toggle="tooltip" data-placement="top"
+                               title="LinkedIn"><span class="ion-logo-linkedin"></span></a>
+                        </li>
+                        <li class="ftco-animate">
+                            <a href="https://github.com/moheladwy" data-toggle="tooltip" data-placement="top"
+                               title="GitHub"><span class="ion-logo-github"></span></a>
+                        </li>
+                        <li class="ftco-animate">
+                            <a href="https://www.facebook.com/mohamed.h.eladwy" data-toggle="tooltip" data-placement="top"
+                               title="Facebook"><span class="ion-logo-facebook"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12 text-center">
+                    <p class="copyright">
+                        Copyright &copy; 2023 All rights reserved.
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/popper.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

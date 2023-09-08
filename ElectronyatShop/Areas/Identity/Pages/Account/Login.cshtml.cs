@@ -116,6 +116,9 @@ namespace ElectronyatShop.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    if (User.Identity.IsAuthenticated && User.HasClaim("Admin", "Admin"))
+                        returnUrl = Url.Content("~/Admin");
                     
                     return LocalRedirect(returnUrl);
                 }

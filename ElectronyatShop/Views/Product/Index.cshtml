@@ -4,7 +4,7 @@
 }
 
 @section Links {
-    <link rel="stylesheet" href="~/css/styles.css" />
+    <link rel="stylesheet" href="~/css/products-styles.css" />
     <link rel="icon" type="image/x-icon" href="~/assets/favicon.ico" />
 }
 
@@ -36,11 +36,23 @@
                             <div class="text-center">
                                 <!-- Product price-->
                                 <hr />
-                                <span>@product.Price$</span>
+                                @if (product.DiscountPercentage > 0)
+                                {
+                                    <span class="text-decoration-line-through">
+                                        $@product.Price 
+                                    </span>
+                                    <span style="margin: 0 10px;"> - </span>
+                                    <span>
+                                        $@(product.Price - (product.Price * product.DiscountPercentage / 100))
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span>$@product.Price</span>
+                                }
                             </div>
                             <div class="text-center">
                                 <a class="btn btn-outline-dark mt-2" href="~/Product/Details/@product.Id">View Details</a>
-                                <a class="btn btn-outline-dark mt-2 add-cart" href="#">Add to Cart</a>
                             </div>
                         </div>
                     </div>
