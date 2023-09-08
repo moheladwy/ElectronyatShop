@@ -1,0 +1,102 @@
+﻿@using ElectronyatShop.ViewModels
+@model ProductViewModel
+
+@{
+	ViewData["Title"] = "Edit Product";
+}
+
+<h1 class="row justify-content-center" style="text-align: center;">Edit Product @Model.Name!</h1>
+
+<div class="form-container row justify-content-center">
+	<div class="col-md-4">
+		<form id="edit-product-form" method="post" asp-controller="Admin" asp-action="EditProduct"
+			  class="row justify-content-center" enctype="multipart/form-data">
+			<input asp-for="Id" hidden />
+			<div class="form-group">
+				<label asp-for="Name">Name</label>
+				<input asp-for="Name" class="form-control" autocomplete="name" aria-required="true" placeholder="Lenovo Legion 5" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+			@* TODO: Make the Image Update. *@
+		 @* <div class="form-group">
+				<label asp-for="Image">Image</label>
+				<input type="file" accept=".jpg, .jpeg, .png, .bmp" asp-for="Image" class="form-control" />
+				<span asp-validation-for="Image" class="text-danger"></span>
+			</div> *@
+			<div class="form-group">
+				<label asp-for="Description">Description</label>
+				<input asp-for="Description" class="form-control" aria-required="true" placeholder="Description" />
+				<span asp-validation-for="Description" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Price">Price</label>
+				<input asp-for="Price" class="form-control" aria-required="true" />
+				<span asp-validation-for="Price" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="AvailableQuantity">Available Quantity</label>
+				<input asp-for="AvailableQuantity" class="form-control" aria-required="true" />
+				<span asp-validation-for="AvailableQuantity" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="DiscountPercentage">Discount Percentage</label>
+				<input asp-for="DiscountPercentage" class="form-control" aria-required="true" />
+				<span asp-validation-for="DiscountPercentage" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Status">Is for Sale?</label>
+				<select asp-for="Status" asp-items="Model.StatusList" class="form-control"></select>
+				<span asp-validation-for="Status" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-outline-dark m-2" type="submit">Edit</button>
+				<a class="btn btn-outline-dark m-2" asp-controller="Admin" asp-action="Index">Back</a>
+			</div>
+		</form>
+	</div>
+</div>
+
+@section Links {
+	<link rel="stylesheet" href="~/css/styles.css" />
+	<link rel="icon" type="image/x-icon" href="~/assets/favicon.ico" />
+	<style>
+		.form-container {
+			max-width: 100%;
+			margin-bottom: auto;
+		}
+
+		.form-group {
+			margin: 5px auto;
+		}
+
+		/* Style the select box */
+		select {
+			width: 200px; /* Set the width of the select box */
+			padding: 10px; /* Add padding to the select box */
+			font-size: 16px; /* Set the font size */
+			border: 1px solid #ccc; /* Add a border */
+		}
+
+		/* Style the options */
+		select option {
+			font-size: 14px; /* Set the font size for options */
+			background-color: #f0f0f0; /* Set the background color */
+			color: #333; /* Set the text color */
+			padding: 5px; /* Add padding to the options */
+		}
+
+		/* Style the selected option */
+		select option:checked {
+			background-color: #007bff; /* Change the background color for the selected option */
+			color: #fff; /* Change the text color for the selected option */
+		}
+	</style>
+}
+
+@section Scripts {
+	<!-- Core theme JS-->
+	<script src="~/js/scripts.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
