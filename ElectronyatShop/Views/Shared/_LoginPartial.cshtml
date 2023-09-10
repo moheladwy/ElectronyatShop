@@ -1,9 +1,12 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using ElectronyatShop.Data;
+@using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Authorization
 @using System.Threading
+@using Microsoft.EntityFrameworkCore;
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @inject IAuthorizationService Authorize
+@inject ApplicationDbContext context
 @{
     AuthorizationResult authorizationResult = await Authorize.AuthorizeAsync(User, "AdminRole");
     // Get the currently authenticated user
@@ -23,12 +26,13 @@
     }
     else
     {
+        var cart = context.Carts.Include(c => c.CartItems).Where(c => c.UserId == user.Id).FirstOrDefault();
         <li class="nav-item me-2">
-            <form id="cart-form" class="d-flex">
+            <form id="cart-form" class="d-flex" asp-controller="Cart" asp-action="Index" method="get">
                 <button class="btn btn-outline-dark" type="submit">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">@(cart?.CartItems?.Count ?? 0)</span>
                 </button>
             </form>
         </li>

@@ -22,6 +22,7 @@ namespace ElectronyatShop.ViewModels
 
 		[Required(ErrorMessage = "Price is Required!")]
 		[Range(0, int.MaxValue, ErrorMessage = $"Price cannot be less than 0!")]
+		[DisplayFormat(DataFormatString = "{0.00}")]
 		public decimal Price { get; set; }
 
 		[Required(ErrorMessage = "Available Quantity is Required!")]

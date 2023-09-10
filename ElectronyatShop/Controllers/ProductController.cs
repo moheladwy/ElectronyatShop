@@ -1,5 +1,6 @@
 ﻿using ElectronyatShop.Data;
 using ElectronyatShop.Models;
+using ElectronyatShop.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +13,9 @@ namespace ElectronyatShop.Controllers
 
         private readonly ApplicationDbContext Context;
 
-        private readonly Cart? cart;
-
         public ProductController(ApplicationDbContext context)
         {
             Context = context;
-            //var userId = Context.Users.Where(u => u.UserName == User.Identity.Name).First().Id;
-            //cart = context.Carts.FirstOrDefault(c => c.UserId == userId);
         }
 
         #region Controller Actions
@@ -36,23 +33,14 @@ namespace ElectronyatShop.Controllers
         [HttpGet]
         public IActionResult Details([FromRoute] int id)
         {
-            Product? product = Context.Products.Find(id);
+            Product? productItem = Context.Products.Find(id);
             
-            if (product == null)
+            if (productItem == null)
                 RedirectToAction("Index");
-            
-            return View("Details", product);
-        }
 
-        [HttpGet]
-        public IActionResult AddToCart([FromRoute] int id)
-        {
-            Product? product = Context.Products.Find(id);
-            if (product == null || product.AvailableQuantity == 0)
-                return RedirectToAction("Index");
-            product.AvailableQuantity--;
-            //cart?.Products?.Add(product);
-            return RedirectToAction("Index");
+            CartItemViewModel item = new() { ProductId = productItem?.Id };
+            
+            return View("Details", item);
         }
 
         #endregion

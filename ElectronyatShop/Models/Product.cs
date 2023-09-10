@@ -6,6 +6,9 @@ namespace ElectronyatShop.Models
     {
         [Key]
         public int Id { get; set; }
+        
+        // TODO: Finish the ProductType Enum Assign and helpers.
+        public ProductType? Type { get; set; }
 
         [Required(ErrorMessage = "Name is Required!")]
         public string Name { get; set; }
@@ -27,5 +30,7 @@ namespace ElectronyatShop.Models
 
         [Required]
         public bool Status {  get; set; }
+
+        public ICollection<CartItem>? CartItems { get; set; }
     }
 }

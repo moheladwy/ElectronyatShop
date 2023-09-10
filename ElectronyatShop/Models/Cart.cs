@@ -7,15 +7,15 @@ namespace ElectronyatShop.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
+        public decimal TotalPrice { get; set; } = 0;
         
         [ForeignKey("User")]
         public string? UserId { get; set; }
 
         public virtual ApplicationUser? User { get; set; }
 
-        [ForeignKey("Products")]
-        public int? ProductId { get; set; }
-
-        public virtual Product? Products { get; set;}
+        public ICollection<CartItem>? CartItems { get; set; }
     }
 }

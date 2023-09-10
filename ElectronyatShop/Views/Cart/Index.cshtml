@@ -1,0 +1,130 @@
+﻿@using ElectronyatShop.ViewModels
+@using ElectronyatShop.Data
+@inject ApplicationDbContext context
+@model CartViewModel
+@{
+	ViewData["Title"] = "Cart";
+}
+
+@section Links {
+    <link rel="sylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+	<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/Cart/style.css" rel="stylesheet" />
+	<link href="~/fonts/ionicons/css/ionicons.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+}
+
+<section class="h-100 h-custom">
+    <div class="container h-100 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                @if (Model.CartItems != null)
+                {
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="h5">Shopping Bag</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col" colspan="2">TotalPrice</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (CartItem item in Model.CartItems)
+                                {
+                                    Product product = context.Products.Where(p => p.Id == item.ProductId).First();
+                                    decimal actualPrice = (product.DiscountPercentage == 0) ? product.Price :
+                                    (product.Price - (product.Price * product.DiscountPercentage / 100));
+                                    decimal TotalPriceItem = (item.Quantity * actualPrice);
+                                    Model.SubTotalPrice += TotalPriceItem;
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="d-flex align-items-center">
+                                                <img src="~/Images/@product.Image"
+                                                     class="img-fluid rounded-3" style="width: 120px;" alt="@product.Name">
+                                                <div class="flex-column ms-4">
+                                                    <p class="mb-2">@product.Description</p>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td class="align-middle">
+                                            <p class="mb-0" style="font-weight: 500;">@product.Type</p>
+                                        </td>
+                                        <td class="align-middle">
+                                            <div class="d-flex flex-row">
+                                                <p class="mb-0" style="font-weight: 500;">@item.Quantity</p>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <p class="mb-0" style="font-weight: 500;">$@actualPrice</p>
+                                        </td>
+                                        <td class="align-middle">
+                                            <p class="mb-0" style="font-weight: 500;">$@TotalPriceItem</p>
+                                        </td>
+                                        <td class="align-middle">
+                                            <p class="mb-0">
+                                                <form method="post" asp-controller="Cart" asp-action="RemoveFromCart">
+                                                    <input type="number" id="Id" name="Id" value="@item.Id" hidden />
+                                                    <button type="submit" style="border: none;background-color: white;">
+                                                        <svg xmlns="~/bootstrap-icons" width="16" height="16" fill="red" class="bi bi-trash mt-3" viewBox="0 0 16 16">
+                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div>
+                                    <div class="d-flex justify-content-between" style="font-weight: 500;">
+                                        <p class="mb-2">Subtotal</p>
+                                        <p class="mb-2">$@Model.SubTotalPrice</p>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between" style="font-weight: 500;">
+                                        <p class="mb-0">Shipping</p>
+                                        <p class="mb-0">$@CartViewModel.ShippingCost</p>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
+                                        <p class="mb-2">Total (tax included)</p>
+                                        <p class="mb-2">$@Model.TotalPrice</p>
+                                    </div>
+
+                                    <button type="button" class="btn btn-primary btn-block btn-lg">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Checkout</span>
+                                            <span>$@Model.TotalPrice</span>
+                                        </div>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <h2>You don't have any products in the cart yet!</h2>
+                }
+            </div>
+        </div>
+    </div>
+</section>

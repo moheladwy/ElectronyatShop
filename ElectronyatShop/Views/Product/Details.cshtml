@@ -1,8 +1,15 @@
-﻿@model Product
+﻿@using ElectronyatShop.Data
+@using ElectronyatShop.ViewModels
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization
+@inject ApplicationDbContext context
+@model CartItemViewModel
+
 @{
 	ViewData["Title"] = "Product Details";
-	decimal actualPrice = (Model.DiscountPercentage > 0) ? 
-	(Model.Price - (Model.DiscountPercentage * Model.Price / 100)) : Model.Price;
+	Product product = context.Products.Where(p => p.Id == Model.ProductId).FirstOrDefault();
+	decimal actualPrice = (product.DiscountPercentage > 0) ?
+		(product.Price - (product.DiscountPercentage * product.Price / 100)) : product.Price;
 }
 
 <!-- Product section-->
@@ -10,27 +17,27 @@
 	<div class="container px-4 px-lg-5 my-5">
 		<div class="row gx-4 gx-lg-5 align-items-center">
 			<div class="col-md-6 img-container">
-				<img class="card-img-top mb-5 mb-md-0 product-img" src="~/Images/@Model.Image" alt="@Model.Name">
+				<img class="card-img-top mb-5 mb-md-0 product-img" src="~/Images/@product.Image" alt="@product.Name">
 			</div>
 			<div class="col-md-6">
-				<h1 class="product-name display-5">@Model.Name</h1>
+				<h1 class="product-name display-5">@product.Name</h1>
 				<div class="fs-5 mb-5">
-					@if (Model.DiscountPercentage > 0)
+					@if (product.DiscountPercentage > 0)
 					{
-						<span class="text-decoration-line-through">$@Model.Price</span>
+						<span class="text-decoration-line-through">$@product.Price</span>
 						<span style="margin: 0 10px;"> - </span>
 						<span>@actualPrice</span>
 					}
 					else
 					{
-						<span>$@Model.Price</span>
+						<span>$@product.Price</span>
 					}
 				</div>
-				<p class="lead">@Model.Description</p>
+				<p class="lead">@product.Description</p>
 				<div class="fs-5 mb-5">
-					@if (Model.AvailableQuantity > 0)
+					@if (product.AvailableQuantity > 0)
 					{
-						<span>Available: (@Model.AvailableQuantity)</span>
+						<span>Available: (@product.AvailableQuantity)</span>
 					}
 					else
 					{
@@ -38,11 +45,11 @@
 					}
 				</div>
 				<!-- Shopping Cart -->
-				<form method="post" action="~/Cart/AddToCart">
+				<form method="post" asp-controller="Cart" asp-action="AddToCart">
 					<div class="d-flex">
-						<input asp-for="Id" hidden>
-						<input class="input-quantity form-control text-center me-3" id="inputQuantity" type="number"
-							   value="1" max="@Model.AvailableQuantity" min="1" name="Quantity">
+						<input asp-for="ProductId" hidden />
+						<input class="input-quantity form-control text-center me-3" asp-for="@Model.Quantity" 
+						min="1" max="@product.AvailableQuantity" value="1"/>
 						<button class="action btn btn-outline-dark flex-shrink-0 me-3" type="submit">
 							<i class="bi-cart-fill me-1"></i>
 							Add to cart
