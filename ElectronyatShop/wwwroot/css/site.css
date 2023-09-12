@@ -29,3 +29,11 @@ header {
 .footer .container {
     color: white;
 }
+
+.sale-percentage {
+    background-color: red;
+    color: white;
+    padding: 5px;
+    font-weight: 700;
+    border-radius: 50%;
+}

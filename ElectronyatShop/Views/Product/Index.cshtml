@@ -34,19 +34,17 @@
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div class="text-center">
                                 <!-- Product price-->
-                                <hr />
                                 @if (product.DiscountPercentage > 0)
                                 {
-                                    <span class="text-decoration-line-through">
-                                        $@product.Price.ToString(".")
-                                    </span>
+                                    <p><span class="sale-percentage">@product.DiscountPercentage%</span> Sale</p>
+                                    <hr />
+                                    <span class="text-decoration-line-through">$@product.Price.ToString(".")</span>
                                     <span style="margin: 0 10px;"> - </span>
-                                    <span>
-                                        $@product.ActualPrice.ToString(".")
-                                    </span>
+                                    <span>$@product.ActualPrice.ToString(".")</span>
                                 }
                                 else
                                 {
+                                    <hr />
                                     <span>$@product.Price.ToString(".")</span>
                                 }
                             </div>

@@ -27,6 +27,7 @@
 				<div class="fs-5 mb-3">
 					@if (product.DiscountPercentage > 0)
 					{
+						<span><span class="sale-percentage">@product.DiscountPercentage%</span> Sale => </span>
 						<span class="text-decoration-line-through">$@product.Price.ToString(".")</span>
 						<span style="margin: 0 10px;"> - </span>
 						<span>$@product.ActualPrice.ToString(".")</span>
