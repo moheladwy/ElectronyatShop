@@ -9,7 +9,9 @@ namespace ElectronyatShop.Controllers
     [Authorize("CustomerRole")]
     public class ProductController : Controller
     {
-        public const int PRODUCT_NOT_FOUND = -1;
+		#region Controller Constructor and Attributes
+
+		public const int PRODUCT_NOT_FOUND = -1;
 
         private readonly ApplicationDbContext Context;
 
@@ -18,9 +20,11 @@ namespace ElectronyatShop.Controllers
             Context = context;
         }
 
-        #region Controller Actions
+		#endregion
 
-        [AllowAnonymous]
+		#region Controller Actions
+
+		[AllowAnonymous]
         [HttpGet]
         public IActionResult Index()
         {

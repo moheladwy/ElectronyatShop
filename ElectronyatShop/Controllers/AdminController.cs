@@ -10,11 +10,15 @@ namespace ElectronyatShop.Controllers
     [Authorize("AdminRole")]
     public class AdminController : Controller
     {
+		#region Controller Constructor and Attributes
+
 		private ApplicationDbContext Context { get; set; }
 
         public AdminController(ApplicationDbContext context) => Context = context;
-		
-        #region Controller Actions
+
+		#endregion
+
+		#region Controller Actions
 
 		[HttpGet]
         public IActionResult Index() => View("Index", Context.Products.ToList());
