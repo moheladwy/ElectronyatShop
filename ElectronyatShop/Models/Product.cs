@@ -24,10 +24,12 @@ namespace ElectronyatShop.Models
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Available Quantity is Required!")]
+        [Range(0, int.MaxValue)]
         public int AvailableQuantity { get; set; }
 
         [Required(ErrorMessage = "Discount Percentage is Required!")]
-        public int DiscountPercentage { get; set; } = 0;
+		[Range(0, 100)]
+		public int DiscountPercentage { get; set; } = 0;
 
         public decimal ActualPrice => (DiscountPercentage > 0) ? 
             (Price - (Price * DiscountPercentage / 100)): Price;

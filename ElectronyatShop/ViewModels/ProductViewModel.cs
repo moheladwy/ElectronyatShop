@@ -33,7 +33,7 @@ namespace ElectronyatShop.ViewModels
 		public int AvailableQuantity { get; set; }
 
 		[Required(ErrorMessage = "Discount Percentage is Required!")]
-		[Range(0, int.MaxValue, ErrorMessage = "Discount Percentage cannot be less than 0!")]
+		[Range(0, 100, ErrorMessage = "Discount Percentage cannot be less than 0% or more than 100%!")]
 		public int DiscountPercentage { get; set; } = 0;
 
 		public SelectList? StatusList { get; set; }

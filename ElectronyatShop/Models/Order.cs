@@ -9,12 +9,16 @@ namespace ElectronyatShop.Models
 		[Key]
 		public int Id { get; set; }
 
+		[Required]
 		public DateTime CreateDate { get; set; }
 
+		[Required]
 		public decimal TotalPrice { get; set; }
 
+		[Required]
 		public string Address { get; set; }
 
+		[Required]
 		public OrderStatus Status { get; set; } = OrderStatus.Ordered;
 
 		[ForeignKey("User")]
