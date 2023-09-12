@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ElectronyatShop.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace ElectronyatShop.ViewModels
 {
-	[Authorize("AdminRole")]
+    [Authorize("AdminRole")]
 	public class ProductViewModel
 	{
 		[Key]
@@ -15,6 +16,9 @@ namespace ElectronyatShop.ViewModels
 
 		public string? ImageName { get; set; }
 
+		[Required]
+		public ProductType ProductType { get; set; }
+
 		public IFormFile? Image { get; set; }
 
 		[Required(ErrorMessage = "Description is Required!")]
@@ -22,7 +26,6 @@ namespace ElectronyatShop.ViewModels
 
 		[Required(ErrorMessage = "Price is Required!")]
 		[Range(0, int.MaxValue, ErrorMessage = $"Price cannot be less than 0!")]
-		[DisplayFormat(DataFormatString = "{0.00}")]
 		public decimal Price { get; set; }
 
 		[Required(ErrorMessage = "Available Quantity is Required!")]

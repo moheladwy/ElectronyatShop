@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ElectronyatShop.Enums;
 
 namespace ElectronyatShop.Models
 {
@@ -6,9 +7,9 @@ namespace ElectronyatShop.Models
     {
         [Key]
         public int Id { get; set; }
-        
-        // TODO: Finish the ProductType Enum Assign and helpers.
-        public ProductType? Type { get; set; }
+
+        [Required]
+        public ProductType Type { get; set; }
 
         [Required(ErrorMessage = "Name is Required!")]
         public string Name { get; set; }
@@ -28,9 +29,14 @@ namespace ElectronyatShop.Models
         [Required(ErrorMessage = "Discount Percentage is Required!")]
         public int DiscountPercentage { get; set; } = 0;
 
+        public decimal ActualPrice => (DiscountPercentage > 0) ? 
+            (Price - (Price * DiscountPercentage / 100)): Price;
+
         [Required]
         public bool Status {  get; set; }
 
         public ICollection<CartItem>? CartItems { get; set; }
+
+        public ICollection<OrderItem>? OrderItems { get; set; }
     }
 }

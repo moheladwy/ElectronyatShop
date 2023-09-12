@@ -1,0 +1,130 @@
+﻿@using ElectronyatShop.Data;
+@using ElectronyatShop.Enums;
+@using ElectronyatShop.ViewModels;
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<ApplicationUser> UserManager
+@model OrderViewModel
+@inject ApplicationDbContext context
+
+@{
+    ViewData["Title"] = "Details";
+    var user = await UserManager.GetUserAsync(User);
+}
+
+@section Links {
+	<link href="~/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="~/css/Order/Details.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/js/OrderDetails.js"></script>
+}
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center py-3">
+            <h2 class="h5 mb-0">Order #@Model.Id Details</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-3 d-flex justify-content-between">
+                            <div>
+                                <span class="me-3">@Model.CreateDate</span>
+                                <span class="me-3">#@Model.Id</span>
+                                <span class="me-3">Cash On Delivery</span>
+                                <span class="badge rounded-pill" id="order-status">@Enum.GetName(Model.Status)?.ToUpper()</span>
+                            </div>
+                        </div>
+                        <table class="table table-borderless">
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+                                    Product? product = context.Products.Find(item.ProductId);
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex mb-2">
+                                                <div class="flex-shrink-0">
+                                                    <img src="~/Images/@product.Image" alt="@product.Name" width="35" class="img-fluid">
+                                                </div>
+                                                <div class="flex-lg-grow-1 ms-3">
+                                                    <h6 class="small mb-0">
+                                                        <a href="~/Product/Details/@product.Id" class="text-reset">@product.Name</a>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@item.Quantity</td>
+                                        <td class="text-end">$@((item.Quantity * product.ActualPrice).ToString("."))</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2">Subtotal</td>
+                                    <td class="text-end">$@Model.SubTotal.ToString(".")</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Shipping</td>
+                                    <td class="text-end">$@OrderViewModel.ShippingCost.ToString(".")</td>
+                                </tr>
+                                <tr class="fw-bold">
+                                    <td colspan="2">TOTAL</td>
+                                    <td class="text-end">$@Model.TotalPrice.ToString(".")</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        @if (Model.Status == OrderStatus.Ordered || Model.Status == OrderStatus.Shipped)
+                        {
+                            <a id="cancel-btn" class="btn btn-danger rounded-pill m-auto" href="~/Order/Cancel/@Model.Id">
+                                Cancel Order?
+                            </a>
+                            <p id="cancel-note">
+                                Note: You can cancel the order only if the status is 'Ordered' or 'Shipped', if it's status is 'On The Way' or 'Delivered' you cannot cancel the order!
+                            </p>
+                        }
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h3 class="h6">Payment Method</h3>
+                                <p>
+                                    Cash On Delivery
+                                    <br>
+                                    Total: $@Model.TotalPrice.ToString(".")
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="h6">Shipping Information</h3>
+                        <strong>FedEx</strong>
+                        <span>
+                            <a href="#" class="text-decoration-underline" target="_blank">FF1234567890</a>
+                            <i class="bi bi-box-arrow-up-right"></i> 
+                        </span>
+                        <hr>
+                        <h3 class="h6">Address</h3>
+                        <address>
+                            <strong>@user?.FullName</strong><br>
+                            <strong>@user?.Email</strong><br>
+                            <strong>@user?.Address</strong><br>
+                            <strong title="Phone">P:</strong> @(user?.PhoneNumber?? " N/A")
+                        </address>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

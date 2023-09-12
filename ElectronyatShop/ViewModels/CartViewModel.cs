@@ -11,12 +11,8 @@ namespace ElectronyatShop.ViewModels
 
         public const int ShippingCost = 10;
 
-
-		[DisplayFormat(DataFormatString = "{0.00}")]
 		public decimal SubTotalPrice { get; set; } = 0;
 
-
-		[DisplayFormat(DataFormatString = "{0.00}")]
 		public decimal TotalPrice => SubTotalPrice + ShippingCost;
 
         public string? UserId { get; set; }

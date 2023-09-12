@@ -1,16 +1,15 @@
 ﻿@model List<Product>
 @{
-    ViewData["Title"] = "Admin View";
+    ViewData["Title"] = "Admin";
 }
 
 @section Links {
-    <link rel="stylesheet" href="~/css/products-styles.css" />
+    <link rel="stylesheet" href="~/css/Product/styles.css" />
     <link rel="icon" type="image/x-icon" href="~/assets/favicon.ico" />
 }
 
 @section Scripts {
     <!-- Core theme JS-->
-    <script src="~/js/scripts.js"></script>
     <script src="~/js/AdminIndex.js"></script>
 }
 
@@ -36,7 +35,19 @@
                             <div class="text-center">
                                 <!-- Product price-->
                                 <hr />
-                                <span>@product.Price$</span>
+                                @if (product.DiscountPercentage > 0)
+                                {
+                                    <span class="text-decoration-line-through">$@product.Price.ToString(".")</span>
+                                    <span style="margin: 0 10px;"> - </span>
+                                    <span>
+                                        $@product.ActualPrice.ToString(".")
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span>$@product.Price.ToString(".")</span>
+                                }
+
                             </div>
                             <div class="text-center">
                                 <a class="btn btn-outline-dark m-2" href="~/Admin/EditProduct/@product.Id">Edit</a>

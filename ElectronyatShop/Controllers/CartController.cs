@@ -38,8 +38,15 @@ namespace ElectronyatShop.Controllers
             CartViewModel cartViewModel = new()
             {
                 Id = cart.Id,
+                SubTotalPrice = 0,
                 CartItems = cart.CartItems.ToList()
             };
+            foreach (CartItem item in cart.CartItems)
+            {
+                Product? product = Context.Products.Find(item.ProductId);
+                if (product != null)
+                    cartViewModel.SubTotalPrice += (product.ActualPrice * item.Quantity);
+            }
             return View("Index", cartViewModel);
         }
 

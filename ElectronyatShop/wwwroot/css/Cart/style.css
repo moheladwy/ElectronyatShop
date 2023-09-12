@@ -3,3 +3,17 @@
         height: 100vh !important;
     }
 }
+
+#remove-cart-item-btn {
+    border: none;
+    background-color: white;
+}
+
+#product-img {
+    width: 120px;
+}
+
+#continue-shopping {
+    text-decoration: none;
+    font-size: 20px;
+}

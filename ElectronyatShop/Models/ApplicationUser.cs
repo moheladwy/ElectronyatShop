@@ -15,5 +15,7 @@ namespace ElectronyatShop.Models
 
         [Required]
         public string Address { get; set; }
+
+        public ICollection<Order>? Orders { get; set; }
     }
 }

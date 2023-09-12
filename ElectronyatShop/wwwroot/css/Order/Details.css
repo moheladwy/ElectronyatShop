@@ -1,0 +1,11 @@
+﻿#cancel-btn {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 4px 10px;
+    display: block;
+}
+
+#cancel-note {
+    font-size: 14px;
+    margin: 1em;
+}

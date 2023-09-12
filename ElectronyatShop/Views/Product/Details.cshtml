@@ -8,8 +8,11 @@
 @{
 	ViewData["Title"] = "Product Details";
 	Product product = context.Products.Where(p => p.Id == Model.ProductId).FirstOrDefault();
-	decimal actualPrice = (product.DiscountPercentage > 0) ?
-		(product.Price - (product.DiscountPercentage * product.Price / 100)) : product.Price;
+}
+
+@section Links {
+	<link rel="icon" type="image/x-icon" href="~/assets/favicon.ico" />
+	<link rel="stylesheet" href="~/css/Product/Details.css" />
 }
 
 <!-- Product section-->
@@ -21,19 +24,22 @@
 			</div>
 			<div class="col-md-6">
 				<h1 class="product-name display-5">@product.Name</h1>
-				<div class="fs-5 mb-5">
+				<div class="fs-5 mb-3">
 					@if (product.DiscountPercentage > 0)
 					{
-						<span class="text-decoration-line-through">$@product.Price</span>
+						<span class="text-decoration-line-through">$@product.Price.ToString(".")</span>
 						<span style="margin: 0 10px;"> - </span>
-						<span>@actualPrice</span>
+						<span>$@product.ActualPrice.ToString(".")</span>
 					}
 					else
 					{
-						<span>$@product.Price</span>
+						<span>$@product.Price.ToString(".")</span>
 					}
 				</div>
-				<p class="lead">@product.Description</p>
+				<div class="fs-5 mb-5">
+					<p>@Enum.GetName(product.Type)</p>
+					<p class="lead">@product.Description</p>
+				</div>
 				<div class="fs-5 mb-5">
 					@if (product.AvailableQuantity > 0)
 					{
@@ -61,43 +67,3 @@
 		</div>
 	</div>
 </section>
-
-@section Links {
-	<link rel="icon" type="image/x-icon" href="~/assets/favicon.ico" />
-	<style>
-		.product-name {
-			font-size: 40px;
-			font-weight: 600;
-			text-align: left;
-		}
-
-		.img-container {
-			margin-right: 5px;
-			max-width: 425px;
-		}
-
-		.product-img {
-			max-width: 350px;
-			max-height: 400px;
-			margin-top: 1em;
-		}
-
-		.input-quantity {
-			max-width: 4rem;
-			border-radius: 1em;
-		}
-
-		.action {
-			padding: 15px;
-			border-radius: 1em;
-		}
-	</style>
-}
-
-@section Scripts {
-	<!-- Core theme JS-->
-	<script src="~/js/scripts.js"></script>
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}

@@ -38,6 +38,7 @@ namespace ElectronyatShop.Controllers
                     {
                         Name = productViewModel.Name,
                         Image = ProccessUploadedImage(productViewModel),
+						Type = productViewModel.ProductType,
                         Description = productViewModel.Description,
                         Price = productViewModel.Price,
                         AvailableQuantity = productViewModel.AvailableQuantity,
@@ -65,6 +66,7 @@ namespace ElectronyatShop.Controllers
                 Id = product.Id,
                 Name = product.Name,
                 ImageName = product.Image,
+                ProductType = product.Type,
                 Description = product.Description,
                 Price = product.Price,
                 AvailableQuantity = product.AvailableQuantity,
@@ -82,6 +84,7 @@ namespace ElectronyatShop.Controllers
             if (ModelState.IsValid && product != null && product.Id == productViewModel.Id)
             {
                 product.Name = productViewModel.Name;
+                product.Type = productViewModel.ProductType;
                 product.Description = productViewModel.Description;
                 product.Price = productViewModel.Price;
                 product.AvailableQuantity = productViewModel.AvailableQuantity;

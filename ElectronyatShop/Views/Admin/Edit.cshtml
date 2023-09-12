@@ -1,8 +1,14 @@
-﻿@using ElectronyatShop.ViewModels
+﻿@using ElectronyatShop.Enums;
+@using ElectronyatShop.ViewModels
 @model ProductViewModel
 
 @{
 	ViewData["Title"] = "Edit Product";
+}
+
+@section Links {
+	<link rel="icon" type="image/x-icon" href="~/assets/favicon.ico" />
+	<link rel="stylesheet" href="~/css/Admin/EditProduct.css" />
 }
 
 <h1 class="row justify-content-center" style="text-align: center;">Edit @Model.Name</h1>
@@ -24,6 +30,11 @@
 				<label asp-for="Image">Image</label>
 				<input type="file" accept=".jpg, .jpeg, .png, .bmp" asp-for="Image" class="form-control" />
 				<span asp-validation-for="Image" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="ProductType">Product Type</label>
+				<select asp-for="ProductType" asp-items="Html.GetEnumSelectList<ProductType>()" class="form-control"></select>
+				<span asp-validation-for="ProductType" class="text-danger"></span>
 			</div>
 			<div class="form-group">
 				<label asp-for="Description">Description</label>
@@ -51,74 +62,9 @@
 				<span asp-validation-for="Status" class="text-danger"></span>
 			</div>
 			<div class="form-group action-btn">
-				<button class="btn btn-outline-dark m-2" type="submit">Edit</button>
-				<a class="btn btn-outline-dark m-2" asp-controller="Admin" asp-action="Index">Back</a>
+				<button class="btn m-2 form-action" type="submit">Edit</button>
+				<a class="btn m-2 form-action" asp-controller="Admin" asp-action="Index">Back</a>
 			</div>
 		</form>
 	</div>
 </div>
-
-@section Links {
-	<link rel="icon" type="image/x-icon" href="~/assets/favicon.ico" />
-	<style>
-		h1 {
-			font-size: 26px;
-			font-weight: 400;
-		}
-
-		.form-container {
-			max-width: 100%;
-			margin-bottom: auto;
-		}
-
-		.form-group {
-			margin: 5px auto;
-		}
-
-		/* Style the select box */
-		select {
-			width: 200px; /* Set the width of the select box */
-			padding: 10px; /* Add padding to the select box */
-			font-size: 16px; /* Set the font size */
-			border: 1px solid #ccc; /* Add a border */
-		}
-
-		/* Style the options */
-		select option {
-			font-size: 14px; /* Set the font size for options */
-			background-color: #f0f0f0; /* Set the background color */
-			color: #333; /* Set the text color */
-			padding: 5px; /* Add padding to the options */
-		}
-
-		/* Style the selected option */
-		select option:checked {
-			background-color: #007bff; /* Change the background color for the selected option */
-			color: #fff; /* Change the text color for the selected option */
-		}
-
-		.img-container {
-			margin-right: 5px;
-			max-width: 425px;
-		}
-
-		.product-img {
-			max-width: 350px;
-			max-height: 400px;
-			border-radius: 50%;
-			margin-top: 1em;
-		}
-
-		.action-btn {
-			text-align: center;
-		}
-	</style>
-}
-
-@section Scripts {
-	<!-- Core theme JS-->
-	<script src="~/js/scripts.js"></script>
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}

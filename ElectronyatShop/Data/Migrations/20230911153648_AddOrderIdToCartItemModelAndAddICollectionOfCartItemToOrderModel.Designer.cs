@@ -4,6 +4,7 @@ using ElectronyatShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElectronyatShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230911153648_AddOrderIdToCartItemModelAndAddICollectionOfCartItemToOrderModel")]
+    partial class AddOrderIdToCartItemModelAndAddICollectionOfCartItemToOrderModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,6 +134,9 @@ namespace ElectronyatShop.Data.Migrations
                     b.Property<int?>("CartId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
@@ -140,6 +146,8 @@ namespace ElectronyatShop.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
 
@@ -177,32 +185,6 @@ namespace ElectronyatShop.Data.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("ElectronyatShop.Models.OrderItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderItems");
-                });
-
             modelBuilder.Entity("ElectronyatShop.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -235,7 +217,7 @@ namespace ElectronyatShop.Data.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Type")
+                    b.Property<int?>("Type")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -395,9 +377,15 @@ namespace ElectronyatShop.Data.Migrations
                         .WithMany("CartItems")
                         .HasForeignKey("CartId");
 
+                    b.HasOne("ElectronyatShop.Models.Order", "Order")
+                        .WithMany("CartItems")
+                        .HasForeignKey("OrderId");
+
                     b.HasOne("ElectronyatShop.Models.Product", "Product")
                         .WithMany("CartItems")
                         .HasForeignKey("ProductId");
+
+                    b.Navigation("Order");
 
                     b.Navigation("Product");
 
@@ -411,21 +399,6 @@ namespace ElectronyatShop.Data.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("ElectronyatShop.Models.OrderItem", b =>
-                {
-                    b.HasOne("ElectronyatShop.Models.Order", "Order")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId");
-
-                    b.HasOne("ElectronyatShop.Models.Product", "Product")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("ProductId");
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -491,14 +464,12 @@ namespace ElectronyatShop.Data.Migrations
 
             modelBuilder.Entity("ElectronyatShop.Models.Order", b =>
                 {
-                    b.Navigation("OrderItems");
+                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("ElectronyatShop.Models.Product", b =>
                 {
                     b.Navigation("CartItems");
-
-                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }
