@@ -1,6 +1,5 @@
 using ElectronyatShop.Data;
 using ElectronyatShop.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ElectronyatShop
