@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-ElectronyatShop-098e87e7-7214-4e74-b75a-ae9aab82a41a</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +21,10 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\fonts\ionicons\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Dockerfile" />
   </ItemGroup>
 
 </Project>

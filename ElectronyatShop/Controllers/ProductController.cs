@@ -11,13 +11,11 @@ namespace ElectronyatShop.Controllers
     {
 		#region Controller Constructor and Attributes
 
-		public const int PRODUCT_NOT_FOUND = -1;
-
-        private readonly ApplicationDbContext Context;
+        private readonly ApplicationDbContext context;
 
         public ProductController(ApplicationDbContext context)
         {
-            Context = context;
+            this.context = context;
         }
 
 		#endregion
@@ -30,14 +28,14 @@ namespace ElectronyatShop.Controllers
         {
             if ((User.Identity?.IsAuthenticated ?? false) && User.HasClaim("Admin", "Admin"))
                 return RedirectToAction(actionName: "Index", controllerName: "Admin");
-            return View("Index", Context.Products.Where(p => p.Status == true).ToList());
+            return View("Index", context.Products.Where(p => p.Status == true).ToList());
         }
 
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Details([FromRoute] int id)
         {
-            Product? productItem = Context.Products.Find(id);
+            Product? productItem = context.Products.Find(id);
             
             if (productItem == null)
                 RedirectToAction("Index");
