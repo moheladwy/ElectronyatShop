@@ -1,6 +1,0 @@
-@ElectronyatShopWebAPI_HostAddress = http://localhost:5074
-
-GET {{ElectronyatShopWebAPI_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

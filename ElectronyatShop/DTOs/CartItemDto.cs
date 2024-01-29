@@ -1,4 +1,4 @@
-namespace ElectronyatShopWebAPI.Controllers;
+namespace ElectronyatShop.DTOs;
 
 public class CartItemDto
 {

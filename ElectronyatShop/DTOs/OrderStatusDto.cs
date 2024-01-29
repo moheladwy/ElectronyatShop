@@ -2,9 +2,9 @@
 // 20241283:39
 // eladwyeladwy
 
-using ElectronyatShopWebAPI.Enums;
+using ElectronyatShop.Enums;
 
-namespace ElectronyatShopWebAPI.DTOs;
+namespace ElectronyatShop.DTOs;
 
 public class OrderStatusDto
 {

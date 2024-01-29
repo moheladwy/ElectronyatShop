@@ -2,7 +2,7 @@
 // 20241282:14
 // eladwyeladwy
 
-namespace ElectronyatShopWebAPI.DTOs;
+namespace ElectronyatShop.DTOs;
 
 public class OrderDto
 {

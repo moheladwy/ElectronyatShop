@@ -1,14 +1,9 @@
-// ElectronyatShopElectronyatShopWebAPICartHelper.cs
-// 202412723:32
-// eladwyeladwy
-
-using ElectronyatShopWebAPI.Controllers;
-using ElectronyatShopWebAPI.Data;
-using ElectronyatShopWebAPI.DTOs;
-using ElectronyatShopWebAPI.Models;
+using ElectronyatShop.Data;
+using ElectronyatShop.DTOs;
+using ElectronyatShop.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ElectronyatShopWebAPI.Helpers;
+namespace ElectronyatShop.Helpers;
 
 public static class CartHelper
 {

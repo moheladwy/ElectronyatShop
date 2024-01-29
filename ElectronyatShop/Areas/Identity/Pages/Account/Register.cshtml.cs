@@ -3,17 +3,17 @@
 #nullable disable
 
 using System.Text;
-using ElectronyatShop.Data;
 using System.Security.Claims;
-using ElectronyatShop.Models;
-using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authentication;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using ElectronyatShop.Models;
+using ElectronyatShop.Data;
 
 namespace ElectronyatShop.Areas.Identity.Pages.Account
 {
@@ -24,7 +24,7 @@ namespace ElectronyatShop.Areas.Identity.Pages.Account
         private readonly IUserStore<ApplicationUser> _userStore;
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        // private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _context;
 
         public RegisterModel(
@@ -32,7 +32,7 @@ namespace ElectronyatShop.Areas.Identity.Pages.Account
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
+            // IEmailSender emailSender,
             ApplicationDbContext context)
         {
             _userManager = userManager;
@@ -40,8 +40,8 @@ namespace ElectronyatShop.Areas.Identity.Pages.Account
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
             _context = context;
+            // _emailSender = emailSender;
         }
 
         /// <summary>
@@ -144,8 +144,8 @@ namespace ElectronyatShop.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    // await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

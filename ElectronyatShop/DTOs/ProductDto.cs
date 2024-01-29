@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using ElectronyatShopWebAPI.Enums;
+using ElectronyatShop.Enums;
 
-namespace ElectronyatShopWebAPI.DTOs;
+namespace ElectronyatShop.DTOs;
 
 public class ProductDto
 {

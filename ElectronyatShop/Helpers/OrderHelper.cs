@@ -1,9 +1,9 @@
-using ElectronyatShopWebAPI.Data;
-using ElectronyatShopWebAPI.Enums;
-using ElectronyatShopWebAPI.Models;
+using ElectronyatShop.Data;
+using ElectronyatShop.Enums;
+using ElectronyatShop.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ElectronyatShopWebAPI.Helpers;
+namespace ElectronyatShop.Helpers;
 
 public static class OrderHelper
 {

@@ -5,8 +5,6 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectronyatShop", "ElectronyatShop\ElectronyatShop.csproj", "{98EF1A69-D4CD-4AE2-BA46-8FA80D113552}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectronyatShopWebAPI", "ElectronyatShopWebAPI\ElectronyatShopWebAPI.csproj", "{D11AB2B6-CB7E-4B5D-92BB-C2AFD19B1B10}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{98EF1A69-D4CD-4AE2-BA46-8FA80D113552}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98EF1A69-D4CD-4AE2-BA46-8FA80D113552}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98EF1A69-D4CD-4AE2-BA46-8FA80D113552}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D11AB2B6-CB7E-4B5D-92BB-C2AFD19B1B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D11AB2B6-CB7E-4B5D-92BB-C2AFD19B1B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D11AB2B6-CB7E-4B5D-92BB-C2AFD19B1B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D11AB2B6-CB7E-4B5D-92BB-C2AFD19B1B10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

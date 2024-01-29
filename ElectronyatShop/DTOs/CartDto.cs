@@ -1,6 +1,6 @@
-using ElectronyatShopWebAPI.Models;
+using ElectronyatShop.Models;
 
-namespace ElectronyatShopWebAPI.DTOs;
+namespace ElectronyatShop.DTOs;
 
 public class CartDto
 {

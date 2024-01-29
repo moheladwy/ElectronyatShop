@@ -1,7 +1,7 @@
-using ElectronyatShopWebAPI.DTOs;
-using ElectronyatShopWebAPI.Models;
+using ElectronyatShop.DTOs;
+using ElectronyatShop.Models;
 
-namespace ElectronyatShopWebAPI.Helpers;
+namespace ElectronyatShop.Helpers;
 
 public static class AdminHelper
 {
