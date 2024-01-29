@@ -1,6 +1,8 @@
 ﻿using ElectronyatShop.Data;
+using ElectronyatShop.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ElectronyatShop.Controllers
 {
@@ -13,10 +15,7 @@ namespace ElectronyatShop.Controllers
 
         private readonly ApplicationDbContext context;
 
-        public ProductController(ApplicationDbContext context)
-        {
-            this.context = context;
-        }
+        public ProductController(ApplicationDbContext context) => this.context = context;
 
         #endregion
 
@@ -27,8 +26,8 @@ namespace ElectronyatShop.Controllers
         [Route("get-all")]
         public IActionResult GetAllProducts()
         {
-            var products = context.Products.ToList();
-            return Ok(products);
+            var products = context.Products.AsNoTracking().ToList();
+            return Ok(ProductHelper.ConvertProductsToProductsDto(products));
         }
         
         [AllowAnonymous]
@@ -36,10 +35,10 @@ namespace ElectronyatShop.Controllers
         [Route("get-by-id/{id}")]
         public IActionResult GetProductById([FromRoute] int id)
         {
-            var product = context.Products.Find(id);
-            if (product == null)
-                return NotFound($"Product with id = {id} Not Found");
-            return Ok(product);
+            var product = context.Products.AsNoTracking().FirstOrDefault(p => p.Id == id);
+            return (product is not null) ?
+                Ok(ProductHelper.ConvertProductToProductDto(product)) : 
+                NotFound($"Product with id = {id} Not Found");
         }
 
         #endregion 

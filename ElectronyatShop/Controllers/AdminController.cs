@@ -14,9 +14,9 @@ public class AdminController : ControllerBase
 {
     #region Controller Constructor and Attributes
 
-    private ApplicationDbContext Context { get; set; }
+    private readonly ApplicationDbContext context;
 
-    public AdminController(ApplicationDbContext context) => Context = context;
+    public AdminController(ApplicationDbContext context) => this.context = context;
 
     #endregion
     
@@ -27,8 +27,8 @@ public class AdminController : ControllerBase
     public IActionResult AddNewProduct([FromForm] ProductDto productDto)
     {
         var product = AdminHelper.CreateProduct(productDto);
-        Context.Products.Add(product);
-        Context.SaveChanges();
+        context.Products.Add(product);
+        context.SaveChanges();
         return Created();
     }
     
@@ -36,12 +36,12 @@ public class AdminController : ControllerBase
     [Route("update-product")]
     public IActionResult UpdateProduct([FromForm] Product productToBeUpdated)
     {
-        var product = Context.Products.Find(productToBeUpdated.Id);
+        var product = context.Products.Find(productToBeUpdated.Id);
         if (product == null)
             return NotFound($"Product with id = {productToBeUpdated.Id} Not Found");
         AdminHelper.UpdateProduct(product, productToBeUpdated);
-        Context.Products.Update(product);
-        Context.SaveChanges();
+        context.Products.Update(product);
+        context.SaveChanges();
         return Ok();
     }
     
@@ -49,11 +49,11 @@ public class AdminController : ControllerBase
     [Route("delete-product/{id}")]
     public IActionResult DeleteProduct([FromRoute] int id)
     {
-        var product = Context.Products.Find(id);
+        var product = context.Products.Find(id);
         if (product == null)
             return NotFound($"Product with id = {id} Not Found");
-        Context.Products.Remove(product);
-        Context.SaveChanges();
+        context.Products.Remove(product);
+        context.SaveChanges();
         return Ok();
     }
     

@@ -14,12 +14,9 @@ public class CartController : ControllerBase
 {
     #region Controller Constructor and Attributes
 
-    private ApplicationDbContext Context { get; set; }
+    private readonly ApplicationDbContext context;
 
-    public CartController(ApplicationDbContext context)
-    {
-        Context = context;
-    }
+    public CartController(ApplicationDbContext context) => this.context = context;
 
     #endregion
     
@@ -29,17 +26,17 @@ public class CartController : ControllerBase
     [Route("get/{userId}")]
     public IActionResult Get([FromRoute] string userId)
     {
-        var cart = Context.Carts.Include(c => c.CartItems).First(c => c.UserId == userId);
-        return Ok(CartHelper.ConvertCartToCartDto(cart, Context));
+        var cart = context.Carts.Include(c => c.CartItems).First(c => c.UserId == userId);
+        return Ok(CartHelper.ConvertCartToCartDto(cart, context));
     }
     
     [HttpPost]
     [Route("add-item")]
     public IActionResult Add([FromBody] CartItemDto cartItem)
     {
-        var item = CartHelper.ConvertCartItemDtoToCartItem(cartItem, Context);
-        Context.CartItems.Add(item);
-        Context.SaveChanges();
+        var item = CartHelper.ConvertCartItemDtoToCartItem(cartItem, context);
+        context.CartItems.Add(item);
+        context.SaveChanges();
         return StatusCode(201); // to be reviewed.
     }
     
@@ -47,11 +44,11 @@ public class CartController : ControllerBase
     [Route("remove-item/{id}")]
     public IActionResult Remove([FromRoute] int id)
     {
-        var item = Context.CartItems.Find(id);
+        var item = context.CartItems.Find(id);
         if (item == null)
             return NotFound();
-        Context.CartItems.Remove(item);
-        Context.SaveChanges();
+        context.CartItems.Remove(item);
+        context.SaveChanges();
         return Ok();
     }
     
