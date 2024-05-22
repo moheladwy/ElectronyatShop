@@ -13,7 +13,7 @@ namespace ElectronyatShop.Controllers
     {
         #region Controller Constructor and Attributes
 
-        private ApplicationDbContext Context { get; set; }
+        private SqliteDbContext Context { get; set; }
 
         private string? userId { get; set; }
 
@@ -21,7 +21,7 @@ namespace ElectronyatShop.Controllers
 
         private UserManager<ApplicationUser> UserManager { get; set; }
 
-        public CartController(UserManager<ApplicationUser> userManger, ApplicationDbContext context)
+        public CartController(UserManager<ApplicationUser> userManger, SqliteDbContext context)
         {
             Context = context;
             UserManager = userManger;

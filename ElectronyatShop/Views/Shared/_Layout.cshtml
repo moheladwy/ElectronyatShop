@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Authorization
-@using System.Threading
 @inject IAuthorizationService Authorize
 @{
     AuthorizationResult authorizationResult = await Authorize.AuthorizeAsync(User, "AdminRole");

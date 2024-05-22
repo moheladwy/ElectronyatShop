@@ -4,7 +4,7 @@
 @using Microsoft.AspNetCore.Identity;
 @inject UserManager<ApplicationUser> UserManager
 @model OrderViewModel
-@inject ApplicationDbContext context
+@inject SqliteDbContext context
 
 @{
     ViewData["Title"] = "Details";

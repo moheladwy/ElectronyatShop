@@ -13,9 +13,9 @@ namespace ElectronyatShop.Controllers
 
 		public const int PRODUCT_NOT_FOUND = -1;
 
-        private readonly ApplicationDbContext Context;
+        private readonly SqliteDbContext Context;
 
-        public ProductController(ApplicationDbContext context)
+        public ProductController(SqliteDbContext context)
         {
             Context = context;
         }

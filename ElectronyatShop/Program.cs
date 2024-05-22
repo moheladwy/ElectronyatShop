@@ -4,22 +4,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ElectronyatShop
 {
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
+        public static async void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            const string connectionStringName = "SqliteConnection";
+
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
-            
+            var connectionString = builder.Configuration.GetConnectionString(connectionStringName) ?? throw new InvalidOperationException($"Connection string '{connectionStringName}' not found.");
+
+            builder.Services.AddDbContext<SqliteDbContext>(options =>
+                options.UseSqlite(connectionString));
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<SqliteDbContext>();
 
             builder.Services.AddAuthorization(option =>
                 option.AddPolicy("AdminRole", op => op.RequireClaim("Admin", "Admin")));
@@ -31,6 +33,9 @@ namespace ElectronyatShop
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
+
+            ManageDatabase manageDatabase = new();
+            await manageDatabase.AddAdminToDB(app);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -56,7 +61,7 @@ namespace ElectronyatShop
             app.MapControllerRoute(
                 name: "Admin",
                 pattern: "{controller=Admin}/{action=Index}/{id?}");
-            
+
             app.MapRazorPages();
 
             app.Run();

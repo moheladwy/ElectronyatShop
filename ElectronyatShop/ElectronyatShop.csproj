@@ -23,7 +23,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\SqliteMigrations\" />
     <Folder Include="wwwroot\fonts\ionicons\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\**" />
+    <Compile Remove="Data\ApplicationDbContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Data\Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Data\Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Data\Migrations\**" />
   </ItemGroup>
 
 </Project>
