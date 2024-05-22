@@ -1,12 +1,13 @@
 using ElectronyatShop.Data;
 using ElectronyatShop.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ElectronyatShop
 {
     public static class Program
     {
-        public static async void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +22,8 @@ namespace ElectronyatShop
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddEntityFrameworkStores<SqliteDbContext>();
+                .AddRoles<IdentityRole>().AddEntityFrameworkStores<SqliteDbContext>().
+                AddSignInManager<SignInManager<ApplicationUser>>();
 
             builder.Services.AddAuthorization(option =>
                 option.AddPolicy("AdminRole", op => op.RequireClaim("Admin", "Admin")));
@@ -47,13 +49,9 @@ namespace ElectronyatShop
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthentication();
-
             app.UseAuthorization();
-
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Product}/{action=Index}/{id?}");
@@ -63,7 +61,6 @@ namespace ElectronyatShop
                 pattern: "{controller=Admin}/{action=Index}/{id?}");
 
             app.MapRazorPages();
-
             app.Run();
         }
     }
