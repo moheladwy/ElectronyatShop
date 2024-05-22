@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using ElectronyatShop.Models;
-using System.Collections;
+﻿using ElectronyatShop.Models;
 
 namespace ElectronyatShop.ViewModels
 {

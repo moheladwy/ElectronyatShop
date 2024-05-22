@@ -17,13 +17,13 @@ namespace ElectronyatShop.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
-        private readonly ApplicationDbContext _context;
+        private readonly SqliteDbContext _context;
 
         public DeletePersonalDataModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<DeletePersonalDataModel> logger,
-            ApplicationDbContext context)
+            SqliteDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;

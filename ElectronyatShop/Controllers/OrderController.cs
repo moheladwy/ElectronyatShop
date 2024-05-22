@@ -14,13 +14,13 @@ namespace ElectronyatShop.Controllers
 	{
 		#region Controller Constructor and Attributes
 
-		private ApplicationDbContext Context;
+		private SqliteDbContext Context;
 
 		private UserManager<ApplicationUser> UserManager;
 
 		private string userId;
 
-		public OrderController(ApplicationDbContext context, UserManager<ApplicationUser> userManager) 
+		public OrderController(SqliteDbContext context, UserManager<ApplicationUser> userManager)
 		{
 			Context = context;
 			UserManager = userManager;

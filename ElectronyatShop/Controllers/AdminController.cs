@@ -12,9 +12,9 @@ namespace ElectronyatShop.Controllers
     {
 		#region Controller Constructor and Attributes
 
-		private ApplicationDbContext Context { get; set; }
+		private SqliteDbContext Context { get; set; }
 
-        public AdminController(ApplicationDbContext context) => Context = context;
+        public AdminController(SqliteDbContext context) => Context = context;
 
 		#endregion
 
