@@ -43,11 +43,11 @@ Before you begin, ensure you meet the following requirements:
 
 - **Visual Studio or Any .NET IDE:** You'll need an integrated development environment (IDE) such as Visual Studio or any other .NET IDE to work on and run the project. You can download Visual Studio from the [Visual Studio website](https://visualstudio.microsoft.com/) if you prefer it as your IDE.
 
-- **.NET 7 SDK:** You must have .NET 7 SDK installed on your development machine. You can download it from the [official .NET website](https://dotnet.microsoft.com/download/dotnet/7.0).
+- **.NET 8 SDK/runtime:** You must have .NET 8 SDK/runtime installed on your development machine. You can download it from the [official .NET website](https://dotnet.microsoft.com/download/dotnet/8.0).
 
 - **ASP.NET MVC:** Familiarity with ASP.NET MVC is recommended for understanding and working with the project's architecture and code.
 
-- **SQL Server 2022:** Electronyat Shop uses SQL Server 2022 as its database. Ensure you have SQL Server 2022 installed and configured on your machine.
+- **Sqlite:** Electronyat Shop uses SQLite as its database. Ensure you have SQLite installed on your machine.
 
 ## Installation
 
@@ -57,17 +57,9 @@ Before you begin, ensure you meet the following requirements:
    git clone https://github.com/moheladwy/ElectronyatShop
    ```
 
-2. Open the project in Visual Studio (ensure you have .NET 7 installed).
+2. Open the project in Visual Studio (ensure you have .NET 8.0 installed).
 
-3. Configure the database connection in `appsettings.json` to connect to your SQL Server 2022 instance.
-
-4. Run the database migrations to create the necessary tables:
-
-   ```bash
-   dotnet ef database update
-   ```
-
-5. Build and run the application.
+3. Build and run the application.
 
 ## Usage
 
