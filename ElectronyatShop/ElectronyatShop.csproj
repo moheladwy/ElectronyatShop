@@ -25,6 +25,7 @@
   <ItemGroup>
     <Folder Include="Data\SqliteMigrations\" />
     <Folder Include="wwwroot\fonts\ionicons\" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +43,31 @@
 
   <ItemGroup>
     <None Remove="Data\Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Astro Gaming A10 Wired Headset- Black Red.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Friday-Sep-08-2023-03-42-28-Dell G15 5511.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Friday-Sep-08-2023-03-49-31-Dell G15 5520.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Friday-Sep-08-2023-03-51-27-Dell XPS 15 9575.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Friday-Sep-08-2023-03-52-59-Alienware x15 R1.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Friday-Sep-15-2023-12-41-17-Dean Winchester.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Lenovo IdeaPad Gaming 3 15ARH7.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Lenovo Legion 5 Pro 16ACH6H Gaming Laptop.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Microsoft Surface Pro 8.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\OMEN by HP Wired USB Gaming Keyboard 1100 Black-Red.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Redragon H201 Stereo Gaming Headset.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Redragon Phaser M609 Gaming Mouse.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Thursday-May-09-2024-02-38-52-Alienware x15 R1.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Thursday-Sep-07-2023-10-12-48-mohamed hussein.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Tuesday-Sep-12-2023-04-21-07-MSI G272QPF 27 Gaming Monitor.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Tuesday-Sep-12-2023-04-24-24-SAMSUNG MONITOR 27 LS27BG400EUX.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Wednesday-May-22-2024-06-30-59-mohamed hussein (1).jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Wednesday-May-22-2024-06-32-21-Screenshot_227.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Wednesday-May-22-2024-06-33-26-Matt Thmes from Doctor Who.jpeg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Wednesday-May-22-2024-06-34-51-The Tenth Doctor with Rose Tyler.jpeg" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Wednesday-May-22-2024-06-35-47-3aafb6e1-add6-41fb-bb2a-3043f83a8ea0.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\Wednesday-Sep-13-2023-09-32-43-Dell XPS 15 7590 15Inech Ultrabook.jpg" />
   </ItemGroup>
 
 </Project>
