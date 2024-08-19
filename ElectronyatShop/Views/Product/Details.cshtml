@@ -5,7 +5,7 @@
 
 @{
 	ViewData["Title"] = "Product Details";
-	Product product = context.Products.Where(p => p.Id == Model.ProductId).FirstOrDefault();
+	Product? product = context.Products.Where(p => p.Id == Model.ProductId).FirstOrDefault();
 }
 
 @section Links {
@@ -18,31 +18,31 @@
 	<div class="container px-4 px-lg-5 my-5">
 		<div class="row gx-4 gx-lg-5 align-items-center">
 			<div class="col-md-6 img-container">
-				<img class="card-img-top mb-5 mb-md-0 product-img" src="~/Images/@product.Image" alt="@product.Name">
+				<img class="card-img-top mb-5 mb-md-0 product-img" src="~/Images/@product?.Image" alt="@product?.Name">
 			</div>
 			<div class="col-md-6">
-				<h1 class="product-name display-5">@product.Name</h1>
+				<h1 class="product-name display-5">@product?.Name</h1>
 				<div class="fs-5 mb-3">
-					@if (product.DiscountPercentage > 0)
+					@if (product?.DiscountPercentage > 0)
 					{
-						<span><span class="sale-percentage">@product.DiscountPercentage%</span> Sale => </span>
-						<span class="text-decoration-line-through">$@product.Price.ToString(".")</span>
+						<span><span class="sale-percentage">@product?.DiscountPercentage%</span> Sale => </span>
+						<span class="text-decoration-line-through">$@product?.Price.ToString(".")</span>
 						<span style="margin: 0 10px;"> - </span>
-						<span>$@product.ActualPrice.ToString(".")</span>
+						<span>$@product?.ActualPrice.ToString(".")</span>
 					}
 					else
 					{
-						<span>$@product.Price.ToString(".")</span>
+						<span>$@product?.Price.ToString(".")</span>
 					}
 				</div>
 				<div class="fs-5 mb-5">
 					<p>@Enum.GetName(product.Type)</p>
-					<p class="lead">@product.Description</p>
+					<p class="lead">@product?.Description</p>
 				</div>
 				<div class="fs-5 mb-5">
-					@if (product.AvailableQuantity > 0)
+					@if (product?.AvailableQuantity > 0)
 					{
-						<span>Available: (@product.AvailableQuantity)</span>
+						<span>Available: (@product?.AvailableQuantity)</span>
 					}
 					else
 					{
@@ -54,7 +54,7 @@
 					<div class="d-flex">
 						<input asp-for="ProductId" hidden />
 						<input class="input-quantity form-control text-center me-3" asp-for="@Model.Quantity" 
-						min="1" max="@product.AvailableQuantity" value="1"/>
+						min="1" max="@product?.AvailableQuantity" value="1"/>
 						<button class="action btn btn-outline-dark flex-shrink-0 me-3" type="submit">
 							<i class="bi-cart-fill me-1"></i>
 							Add to cart

@@ -26,10 +26,10 @@ namespace ElectronyatShop
                 AddSignInManager<SignInManager<ApplicationUser>>();
 
             builder.Services.AddAuthorization(option =>
-                option.AddPolicy("AdminRole", op => op.RequireClaim("Admin", "Admin")));
-
-            builder.Services.AddAuthorization(option =>
-                option.AddPolicy("CustomerRole", op => op.RequireClaim("Customer", "Customer")));
+            {
+                option.AddPolicy("AdminRole", op => op.RequireClaim("Admin", "Admin"));
+                option.AddPolicy("CustomerRole", op => op.RequireClaim("Customer", "Customer"));
+            });
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();

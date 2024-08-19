@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-ElectronyatShop-098e87e7-7214-4e74-b75a-ae9aab82a41a</UserSecretsId>
     <LangVersion>12</LangVersion>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,6 +40,9 @@
 
   <ItemGroup>
     <Content Remove="Data\Migrations\**" />
+    <Content Include="..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
