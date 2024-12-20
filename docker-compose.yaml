@@ -1,9 +1,6 @@
 ﻿services:
   electronyat-shop:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: electronyat-shop:latest
+    image: only1adwy/electronyat-shop:latest
     deploy:
       mode: replicated
       replicas: 2

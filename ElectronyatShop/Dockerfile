@@ -21,6 +21,5 @@ WORKDIR /ElectronyatShop
 
 COPY --from=publish /ElectronyatShop/publish .
 RUN mkdir -p Data
-RUN mkdir -p Data/Migrations
 
 ENTRYPOINT ["sh", "-c", "dotnet ElectronyatShop.dll ef database update && dotnet ElectronyatShop.dll"]
