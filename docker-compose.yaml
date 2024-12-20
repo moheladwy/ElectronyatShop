@@ -1,0 +1,51 @@
+﻿services:
+  electronyat-shop:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: electronyat-shop:latest
+    deploy:
+      mode: replicated
+      replicas: 2
+      update_config:
+        parallelism: 1
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - db-data:/ElectronyatShop/Data/
+      - images-data:/ElectronyatShop/wwwroot/Images/
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Production
+        - SqliteConnection="Data Source=Data/ElectronyatShop_Sqlite.db"
+    networks:
+        - electronyat-network
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  reverse-proxy:
+    image: nginx:alpine
+    container_name: electronyat-reverse-proxy
+    ports:
+        - "8060:80"
+    volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf
+        - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+        - electronyat-network
+    depends_on:
+      - electronyat-shop
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+volumes:
+    db-data:
+        driver: local
+        name: db-data
+    images-data:
+        driver: local
+        name: images-data
+
+networks:
+    electronyat-network:
+        driver: bridge
+        name: electronyat-network
