@@ -1,6 +1,7 @@
 ﻿@using ElectronyatShop.ViewModels
 @using ElectronyatShop.Data
-@inject SqliteDbContext context
+@using Microsoft.EntityFrameworkCore
+@inject SqliteDbContext DbContext
 @model CartViewModel
 @{
 	ViewData["Title"] = "Cart";
@@ -11,7 +12,7 @@
     <link href="~/css/Cart/style.css" rel="stylesheet" />
 }
 
-@if (Model.CartItems != null && Model.CartItems.Count > 0)
+@if (Model.CartItems is not null && Model.CartItems.Count > 0)
 {
     <section class="h-100">
         <div class="container h-100 py-5">
@@ -28,9 +29,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (CartItem item in Model.CartItems)
+                                @foreach (var item in Model.CartItems)
                                 {
-                                    Product product = context.Products.Where(p => p.Id == item.ProductId).First();
+                                    var product = await DbContext.Products.FirstAsync(p => p.Id == item.ProductId);
                                     <tr>
                                         <th scope="row">
                                             <div class="d-flex align-items-center">

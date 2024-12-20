@@ -5,10 +5,9 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @inject IAuthorizationService Authorize
-@inject SqliteDbContext context
+@inject SqliteDbContext DbContext
 @{
-    AuthorizationResult authorizationResult = await Authorize.AuthorizeAsync(User, "AdminRole");
-    // Get the currently authenticated user
+    var authorizationResult = await Authorize.AuthorizeAsync(User, "AdminRole");
     var user = await UserManager.GetUserAsync(User);
 }
 
@@ -35,7 +34,9 @@
     }
     else
     {
-        var cart = context.Carts.Include(c => c.CartItems).Where(c => c.UserId == user.Id).FirstOrDefault();
+        var cart = await DbContext.Carts
+            .Include(c => c.CartItems)
+            .FirstOrDefaultAsync(c => c.UserId == user.Id);
         <li class="nav-item me-2">
             <form id="cart-form" class="d-flex" asp-controller="Cart" asp-action="Index" method="get">
                     <button class="nav-link text-dark" type="submit" style="border: none;background-color: white;display: block;">

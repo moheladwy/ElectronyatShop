@@ -1,11 +1,12 @@
 ﻿@using ElectronyatShop.Data
 @using ElectronyatShop.ViewModels
-@inject SqliteDbContext context
+@using Microsoft.EntityFrameworkCore
+@inject SqliteDbContext DbContext
 @model CartItemViewModel
 
 @{
 	ViewData["Title"] = "Product Details";
-	Product? product = context.Products.Where(p => p.Id == Model.ProductId).FirstOrDefault();
+	var product = await DbContext.Products.FirstOrDefaultAsync(p => p.Id == Model.ProductId);
 }
 
 @section Links {

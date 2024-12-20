@@ -1,9 +1,8 @@
-namespace ElectronyatShop.Models
-{
-    public class ErrorViewModel
-    {
-        public string? RequestId { get; set; }
+namespace ElectronyatShop.Models;
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-    }
+public class ErrorViewModel
+{
+    public string? RequestId { get; set; }
+
+    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 }

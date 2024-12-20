@@ -1,11 +1,10 @@
-﻿namespace ElectronyatShop.Enums
+﻿namespace ElectronyatShop.Enums;
+
+public enum ProductType
 {
-    public enum ProductType
-    {
-        Laptop = 0,
-        Mouse = 1,
-        Keyboard = 2,
-        Headset = 3,
-        Monitor = 4,
-    }
+    Laptop = 0,
+    Mouse = 1,
+    Keyboard = 2,
+    Headset = 3,
+    Monitor = 4,
 }

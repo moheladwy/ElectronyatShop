@@ -1,11 +1,10 @@
-﻿namespace ElectronyatShop.Enums
+﻿namespace ElectronyatShop.Enums;
+
+public enum OrderStatus
 {
-	public enum OrderStatus
-	{
-		Ordered,
-		Shipped,
-		OnTheWay,
-		Delivered,
-		Cancelled
-	}
+	Ordered,
+	Shipped,
+	OnTheWay,
+	Delivered,
+	Cancelled
 }

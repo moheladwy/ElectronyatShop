@@ -17,7 +17,7 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            @foreach (Product product in Model)
+            @foreach (var product in Model)
             {
                 <div class="col mb-5">
                     <div class="card h-100">
@@ -53,7 +53,7 @@
                             </div>
                             <div class="text-center">
                                 <a class="btn btn-outline-dark m-2" href="~/Admin/EditProduct/@product.Id">Edit</a>
-                                <a class="btn btn-outline-dark m-2 delete-prodcut-btn" href="~/Admin/DeleteProduct/@product.Id">Delete</a>
+                                <a class="btn btn-outline-dark m-2 delete-product-btn" href="~/Admin/DeleteProduct/@product.Id">Delete</a>
                             </div>
                         </div>
                     </div>

@@ -3,8 +3,8 @@
 @using ElectronyatShop.ViewModels;
 @using Microsoft.AspNetCore.Identity;
 @inject UserManager<ApplicationUser> UserManager
+@inject SqliteDbContext DbContext
 @model OrderViewModel
-@inject SqliteDbContext context
 
 @{
     ViewData["Title"] = "Details";
@@ -42,7 +42,7 @@
                             <tbody>
                                 @foreach (var item in Model.Items)
                                 {
-                                    Product? product = context.Products.Find(item.ProductId);
+                                    var product = await DbContext.Products.FindAsync(item.ProductId);
                                     <tr>
                                         <td>
                                             <div class="d-flex mb-2">
@@ -76,7 +76,7 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        @if (Model.Status == OrderStatus.Ordered || Model.Status == OrderStatus.Shipped)
+                        @if (Model.Status is OrderStatus.Ordered or OrderStatus.Shipped)
                         {
                             <a id="cancel-btn" class="btn btn-danger rounded-pill m-auto" href="~/Order/Cancel/@Model.Id">
                                 Cancel Order?
