@@ -23,7 +23,7 @@ jobs:
 
       - name: Build the Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/electronyat-shop:${{ env.DATE_TAG }} .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/electronyat-shop:${{ env.DATE_TAG }} ElectronyatShop
 
       - name: Tag the Docker image
         run: |
