@@ -25,7 +25,7 @@
     ports:
         - "8060:80"
     volumes:
-        - ./nginx.conf:/etc/nginx/nginx.conf
+        - ./nginx.conf:/etc/nginx/conf.d/default.conf
         - /var/run/docker.sock:/tmp/docker.sock:ro
     networks:
         - electronyat-network
