@@ -107,12 +107,12 @@ public class AdminController : Controller
 	public async Task<IActionResult> DeleteProduct(int id)
 	{
 		var product = await Context.Products.FindAsync(id);
-		if (product is not null)
-		{
-			DeleteImage(product.Image);
-			Context.Products.Remove(product);
-			await Context.SaveChangesAsync();
-		}
+		if (product is null) return RedirectToAction("Index");
+
+		var imageName = product.Image;
+		Context.Products.Remove(product);
+		await Context.SaveChangesAsync();
+		DeleteImage(imageName);
 		return RedirectToAction("Index");
 	}
 
@@ -141,7 +141,6 @@ public class AdminController : Controller
 	{
 		var imagesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images");
 		var imagePath = Path.Combine(imagesDirectory, imageName);
-		// TODO: Figure out what the cause of the IOException that happens upon deleting the Image.
 		if (System.IO.File.Exists(imagePath))
 			System.IO.File.Delete(imagePath);
 	}
