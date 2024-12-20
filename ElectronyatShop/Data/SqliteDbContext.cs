@@ -17,4 +17,19 @@ public class SqliteDbContext(DbContextOptions<SqliteDbContext> options)
     public DbSet<OrderItem> OrderItems { get; set; }
 
     public DbSet<Order> Orders { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Product>()
+            .HasMany(p => p.CartItems)
+            .WithOne(ci => ci.Product)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Product>()
+            .HasMany(p => p.OrderItems)
+            .WithOne(oi => oi.Product)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
 }
