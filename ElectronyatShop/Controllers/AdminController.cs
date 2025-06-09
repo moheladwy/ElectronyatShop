@@ -13,9 +13,9 @@ public class AdminController : Controller
 {
 	#region Controller Constructor and Attributes
 
-	private SqliteDbContext Context { get; set; }
+	private ElectronyatShopDbContext Context { get; set; }
 
-	public AdminController(SqliteDbContext context) => Context = context;
+	public AdminController(ElectronyatShopDbContext context) => Context = context;
 
 	#endregion
 

@@ -1,13 +1,14 @@
 using ElectronyatShop.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ElectronyatShop.Interfaces;
 
 namespace ElectronyatShop.Data;
 
-public class SqliteDbContext(DbContextOptions<SqliteDbContext> options)
-    : IdentityDbContext<ApplicationUser>(options), IDbContext
+public class ElectronyatShopDbContext : IdentityDbContext<ApplicationUser>
 {
+    public ElectronyatShopDbContext(DbContextOptions<ElectronyatShopDbContext> options) 
+        : base(options) { }
+
     public DbSet<Product> Products { get; set; }
 
     public DbSet<CartItem> CartItems { get; set; }

@@ -1,9 +1,10 @@
 ﻿@using ElectronyatShop.Data;
 @using ElectronyatShop.Enums;
+@using ElectronyatShop.Models
 @using ElectronyatShop.ViewModels;
 @using Microsoft.AspNetCore.Identity;
 @inject UserManager<ApplicationUser> UserManager
-@inject SqliteDbContext DbContext
+@inject ElectronyatShopDbContext DbContext
 @model OrderViewModel
 
 @{

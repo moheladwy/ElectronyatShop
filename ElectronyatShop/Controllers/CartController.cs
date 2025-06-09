@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ElectronyatShop.Controllers;
 
 [Authorize("CustomerRole")]
-public class CartController(UserManager<ApplicationUser> userManager, SqliteDbContext context)
+public class CartController(UserManager<ApplicationUser> userManager, ElectronyatShopDbContext context)
     : Controller
 {
     #region Controller Constructor and Attributes

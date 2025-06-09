@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ElectronyatShop.Controllers;
 
 [Authorize("CustomerRole")]
-public class OrderController(SqliteDbContext context, UserManager<ApplicationUser> userManager) : Controller
+public class OrderController(ElectronyatShopDbContext context, UserManager<ApplicationUser> userManager) : Controller
 {
 	#region Controller Constructor and Attributes
 

@@ -1,52 +1,45 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-ElectronyatShop-098e87e7-7214-4e74-b75a-ae9aab82a41a</UserSecretsId>
-    <LangVersion>12</LangVersion>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DocumentationFile>bin\Release\net9.0\ElectronyatShop.xml</DocumentationFile>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.11" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.11" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     <PackageReference Include="System.Collections.NonGeneric" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\SqliteMigrations\" />
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="Data\Scripts\" />
     <Folder Include="wwwroot\fonts\ionicons\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\**" />
     <Compile Remove="Data\ApplicationDbContext.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="Data\Migrations\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Data\Migrations\**" />
-    <Content Include="..\.dockerignore">
-      <Link>.dockerignore</Link>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Data\Migrations\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,6 +65,12 @@
     <_ContentIncludedByDefault Remove="wwwroot\Images\Wednesday-May-22-2024-06-34-51-The Tenth Doctor with Rose Tyler.jpeg" />
     <_ContentIncludedByDefault Remove="wwwroot\Images\Wednesday-May-22-2024-06-35-47-3aafb6e1-add6-41fb-bb2a-3043f83a8ea0.png" />
     <_ContentIncludedByDefault Remove="wwwroot\Images\Wednesday-Sep-13-2023-09-32-43-Dell XPS 15 7590 15Inech Ultrabook.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
   </ItemGroup>
 
 </Project>
