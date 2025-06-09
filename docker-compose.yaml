@@ -9,9 +9,12 @@
       restart_policy:
         condition: on-failure
     volumes:
-      - images-data:/ElectronyatShop/wwwroot/Images/
+      - images:/ElectronyatShop/wwwroot/Images/
+    env_file:
+      - .env
     environment:
-        - ASPNETCORE_ENVIRONMENT=Production
+        - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+        - ConnectionStrings__PostgresConnection=${POSTGRES_CONNECTION}
     networks:
         - electronyat-shop
         - shared
@@ -19,12 +22,13 @@
       - "com.centurylinklabs.watchtower.enable=true"
 
 volumes:
-    db-data:
+    images:
         driver: local
-        name: db-data
-    images-data:
-        driver: local
-        name: images-data
+        name: images
+        driver_opts:
+            type: none
+            device: ${pwd}/Images
+            o: bind
 
 networks:
     electronyat-shop:
