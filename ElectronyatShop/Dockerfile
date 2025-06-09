@@ -5,16 +5,14 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["ElectronyatShop/ElectronyatShop.csproj", "ElectronyatShop/"]
-RUN dotnet restore "ElectronyatShop/ElectronyatShop.csproj"
+WORKDIR /ElectronyatShop/src
 COPY . .
-WORKDIR "/src/ElectronyatShop"
-RUN dotnet build "./ElectronyatShop.csproj" -c $BUILD_CONFIGURATION -o /ElectronyatShop/build
+RUN dotnet restore
+RUN dotnet build -c $BUILD_CONFIGURATION -o /ElectronyatShop/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./ElectronyatShop.csproj" -c $BUILD_CONFIGURATION -o /ElectronyatShop/publish /p:UseAppHost=false
+RUN dotnet publish -c $BUILD_CONFIGURATION -o /ElectronyatShop/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /ElectronyatShop
