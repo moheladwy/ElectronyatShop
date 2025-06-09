@@ -1,11 +1,12 @@
 ﻿@using ElectronyatShop.Data;
+@using ElectronyatShop.Models
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.EntityFrameworkCore;
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @inject IAuthorizationService Authorize
-@inject SqliteDbContext DbContext
+@inject ElectronyatShopDbContext DbContext
 @{
     var authorizationResult = await Authorize.AuthorizeAsync(User, "AdminRole");
     var user = await UserManager.GetUserAsync(User);

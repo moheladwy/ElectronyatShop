@@ -9,40 +9,32 @@
       restart_policy:
         condition: on-failure
     volumes:
-      - db-data:/ElectronyatShop/Data/
-      - images-data:/ElectronyatShop/wwwroot/Images/
+      - images:/ElectronyatShop/wwwroot/Images/
+    env_file:
+      - .env
     environment:
-        - ASPNETCORE_ENVIRONMENT=Production
-        - SqliteConnection="Data Source=Data/ElectronyatShop_Sqlite.db"
+        - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+        - ConnectionStrings__PostgresConnection=${POSTGRES_CONNECTION}
     networks:
-        - electronyat-network
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-
-  reverse-proxy:
-    image: nginx:alpine
-    container_name: electronyat-reverse-proxy
-    ports:
-        - "8060:80"
-    volumes:
-        - ./nginx.conf:/etc/nginx/conf.d/default.conf
-        - /var/run/docker.sock:/tmp/docker.sock:ro
-    networks:
-        - electronyat-network
-    depends_on:
-      - electronyat-shop
+        - electronyat-shop
+        - shared
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
 volumes:
-    db-data:
+    images:
         driver: local
-        name: db-data
-    images-data:
-        driver: local
-        name: images-data
+        name: images
+        driver_opts:
+            type: none
+            device: ${pwd}/Images
+            o: bind
 
 networks:
-    electronyat-network:
+    electronyat-shop:
         driver: bridge
-        name: electronyat-network
+        name: electronyat-shop
+    shared:
+        driver: bridge
+        name: shared
+        external: true

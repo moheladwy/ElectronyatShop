@@ -13,9 +13,9 @@ public class ProductController : Controller
 
     public const int ProductNotFound = -1;
 
-    private readonly SqliteDbContext _context;
+    private readonly ElectronyatShopDbContext _context;
 
-    public ProductController(SqliteDbContext context) => _context = context;
+    public ProductController(ElectronyatShopDbContext context) => _context = context;
 
     #endregion
 

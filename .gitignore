@@ -365,3 +365,6 @@ FodyWeavers.xsd
 
 # Rider generated files
 .idea
+
+# Environment variables file
+.env
