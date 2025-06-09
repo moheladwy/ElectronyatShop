@@ -1,33 +1,32 @@
 html {
+    position: relative;
     font-size: 14px;
+    min-height: 100%;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-    position: relative;
-    min-height: 100%;
-}
-
 header {
     background-color: #121212;
 }
 
-.footer {
+footer {
     background-color: #303030;
     text-align: center;
-}
-
-.footer .container {
-    color: white;
+    flex: auto;
+    min-height: fit-content;
 }
 
 .sale-percentage {
@@ -36,4 +35,10 @@ header {
     padding: 5px;
     font-weight: 700;
     border-radius: 50%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
 }
